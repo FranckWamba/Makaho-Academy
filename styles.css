@@ -1,0 +1,55 @@
+/* MAKAHO Academy — styles complémentaires à Tailwind */
+:root {
+  --tech: #0D1527;
+  --accent: #FFB800;
+  --action: #10B981;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { font-family: 'Montserrat', system-ui, sans-serif; color: var(--tech); -webkit-font-smoothing: antialiased; }
+
+.hero-bg {
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, rgba(255,184,0,.18), transparent 60%),
+    radial-gradient(40rem 25rem at -10% 110%, rgba(16,185,129,.18), transparent 60%),
+    var(--tech);
+}
+.grid-dots {
+  background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; font-weight:700; border-radius:.75rem; padding:.85rem 1.5rem; transition:transform .15s, box-shadow .2s, background-color .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn-accent { background: var(--accent); color: var(--tech); box-shadow: 0 8px 24px -8px rgba(255,184,0,.6); }
+.btn-accent:hover { background: #ffc933; }
+.btn-action { background: var(--action); color: #fff; box-shadow: 0 8px 24px -8px rgba(16,185,129,.6); }
+.btn-action:hover { background: #0ea371; }
+.btn-ghost { border: 2px solid rgba(255,255,255,.35); color:#fff; }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.card { background:#fff; border-radius:1.25rem; border:1px solid #e5e9f0; box-shadow:0 10px 30px -15px rgba(13,21,39,.25); }
+
+.price-featured { border: 2px solid var(--accent); position: relative; }
+
+.field { width:100%; border:1.5px solid #d6dce6; border-radius:.75rem; padding:.8rem 1rem; background:#fff; font-size:1rem; transition:border-color .2s, box-shadow .2s; }
+.field:focus { border-color: var(--action); box-shadow: 0 0 0 4px rgba(16,185,129,.15); outline: none; }
+.field.invalid { border-color: #e11d48; }
+
+/* Apparition au défilement */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .btn:hover { transform: none; }
+}
+
+/* Barre CTA mobile */
+.mobile-cta { padding-bottom: max(.75rem, env(safe-area-inset-bottom)); }
+@media (max-width: 767px) { body { padding-bottom: 5rem; } }
+
+.nav-link { position: relative; font-weight: 600; }
+.nav-link::after { content:''; position:absolute; left:0; bottom:-6px; height:2px; width:0; background:var(--accent); transition:width .25s; }
+.nav-link:hover::after { width:100%; }
