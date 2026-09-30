@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MAKAHO Academy — Formation aux métiers du digital à Yaoundé</title>
+  <meta name="description" content="MAKAHO Academy, école de formation aux métiers du digital et au graphisme à Yaoundé. Session 1 : TikTok, monétisation, création de contenu & IA. Early Bird 25 000 FCFA.">
+  <meta name="theme-color" content="#0D1527">
+  <meta property="og:title" content="MAKAHO Academy — Ouvrez les yeux sur le digital">
+  <meta property="og:description" content="Des compétences concrètes qui rapportent. Formation TikTok, monétisation, création de contenu & IA à Yaoundé.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="icon" href="assets/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { tech: '#0D1527', accent: '#FFB800', action: '#10B981' },
+        fontFamily: { sans: ['Montserrat', 'system-ui', 'sans-serif'] }
+      } }
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 text-tech">
+
+  <a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-accent focus:text-tech focus:px-4 focus:py-2 focus:rounded">Aller au contenu</a>
+
+  <!-- 1. EN-TÊTE -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between gap-4">
+      <a href="#accueil" aria-label="MAKAHO Academy — accueil" class="shrink-0">
+        <img src="assets/logo.png" alt="MAKAHO — Ouvrez les yeux sur le digital" class="h-11 md:h-14 w-auto" width="230" height="100">
+      </a>
+      <nav class="hidden lg:flex items-center gap-7 text-sm" aria-label="Navigation principale">
+        <a href="#formations" class="nav-link">Formations</a>
+        <a href="#pourquoi" class="nav-link">Pourquoi nous</a>
+        <a href="#equipe" class="nav-link">Formateurs</a>
+        <a href="#inscription" class="nav-link">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="#inscription" class="btn btn-accent !py-2.5 !px-4 text-xs sm:text-sm md:!px-5">
+          <span class="hidden sm:inline">S'inscrire à la prochaine session</span>
+          <span class="sm:hidden">S'inscrire</span>
+        </a>
+        <button id="menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pb-4" aria-label="Navigation mobile">
+      <a href="#formations" class="block py-3 font-semibold border-b border-slate-100">Formations</a>
+      <a href="#pourquoi" class="block py-3 font-semibold border-b border-slate-100">Pourquoi nous</a>
+      <a href="#equipe" class="block py-3 font-semibold border-b border-slate-100">Formateurs</a>
+      <a href="#inscription" class="block py-3 font-semibold">Contact</a>
+    </nav>
+  </header>
+
+  <main id="contenu">
+
+    <!-- 2. HERO -->
+    <section id="accueil" class="hero-bg relative overflow-hidden text-white">
+      <div class="grid-dots absolute inset-0 opacity-60" aria-hidden="true"></div>
+      <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-28 grid md:grid-cols-5 gap-10 items-center">
+        <div class="md:col-span-3">
+          <p class="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold">
+            <span class="w-2 h-2 rounded-full bg-action animate-pulse"></span>
+            Inscriptions ouvertes · Yaoundé, Cameroun
+          </p>
+          <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05]">
+            Ouvrez les yeux sur le <span class="text-accent">digital</span>.<br>
+            Apprenez des compétences qui <span class="text-action">rapportent</span>.
+          </h1>
+          <p class="mt-6 text-lg text-slate-300 max-w-xl">
+            À Yaoundé, MAKAHO Academy vous forme aux métiers du digital et au graphisme avec une méthode 100&nbsp;% concrète&nbsp;: créez, publiez et monétisez dès la fin de votre formation.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href="#inscription" class="btn btn-accent text-base">Réserver ma place Early Bird</a>
+            <a href="#formations" class="btn btn-ghost text-base">Découvrir la Session 1</a>
+          </div>
+          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
+            <li class="flex items-center gap-2"><span class="text-action">✔</span> 70&nbsp;% de pratique</li>
+            <li class="flex items-center gap-2"><span class="text-action">✔</span> 30 jours d'accompagnement</li>
+            <li class="flex items-center gap-2"><span class="text-action">✔</span> Paiement Orange Money / MTN MoMo</li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-2">
+          <div class="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur">
+            <p class="text-accent font-bold text-sm uppercase tracking-wider">Session 1</p>
+            <h2 class="mt-2 text-2xl font-extrabold leading-snug">TikTok, monétisation, création de contenu &amp; IA</h2>
+            <div class="mt-5 flex items-end gap-3">
+              <span class="text-4xl font-black text-accent">25&nbsp;000</span>
+              <span class="pb-1 font-semibold">FCFA</span>
+              <span class="pb-1 text-sm text-slate-400 line-through">30&nbsp;000</span>
+            </div>
+            <p class="text-sm text-slate-300 mt-1">Tarif Early Bird — places limitées</p>
+            <a href="#inscription" class="btn btn-action w-full mt-6">Je m'inscris</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FORMATIONS -->
+    <section id="formations" class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="max-w-2xl reveal">
+          <p class="text-action font-bold uppercase text-sm tracking-wider">Nos formations</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-black">Commencez par la Session 1</h2>
+          <p class="mt-4 text-slate-600">Une formation pensée pour le marché camerounais : produire du contenu qui performe et le transformer en revenus.</p>
+        </div>
+
+        <div class="mt-10 grid lg:grid-cols-5 gap-8">
+          <!-- Programme -->
+          <div class="card lg:col-span-3 p-6 md:p-8 reveal">
+            <div class="flex items-center gap-3">
+              <span class="bg-tech text-accent font-black rounded-xl px-3 py-1.5 text-sm">SESSION 1</span>
+              <span class="text-xs font-bold text-action bg-action/10 rounded-full px-3 py-1">Prochaine session</span>
+            </div>
+            <h3 class="mt-4 text-2xl font-extrabold">TikTok, monétisation, création de contenu &amp; IA</h3>
+            <p class="mt-2 text-slate-600">De zéro à votre premier contenu monétisable, avec les outils d'intelligence artificielle pour aller plus vite.</p>
+
+            <h4 class="mt-6 font-bold">Au programme</h4>
+            <ol class="mt-3 space-y-3">
+              <li class="flex gap-3"><span class="shrink-0 w-8 h-8 rounded-full bg-accent text-tech font-black grid place-items-center text-sm">1</span><div><strong>Maîtriser TikTok</strong><p class="text-sm text-slate-600">Créer et optimiser son compte, comprendre l'algorithme, trouver sa niche.</p></div></li>
+              <li class="flex gap-3"><span class="shrink-0 w-8 h-8 rounded-full bg-accent text-tech font-black grid place-items-center text-sm">2</span><div><strong>Création de contenu</strong><p class="text-sm text-slate-600">Idées, scripts, tournage au smartphone, montage et rythme qui retient l'attention.</p></div></li>
+              <li class="flex gap-3"><span class="shrink-0 w-8 h-8 rounded-full bg-accent text-tech font-black grid place-items-center text-sm">3</span><div><strong>Monétisation</strong><p class="text-sm text-slate-600">Sources de revenus, partenariats, vente de services et de produits, tarification.</p></div></li>
+              <li class="flex gap-3"><span class="shrink-0 w-8 h-8 rounded-full bg-accent text-tech font-black grid place-items-center text-sm">4</span><div><strong>L'IA comme accélérateur</strong><p class="text-sm text-slate-600">Générer idées, textes, images et vidéos avec les bons outils d'IA.</p></div></li>
+              <li class="flex gap-3"><span class="shrink-0 w-8 h-8 rounded-full bg-accent text-tech font-black grid place-items-center text-sm">5</span><div><strong>Plan d'action &amp; suivi</strong><p class="text-sm text-slate-600">Calendrier éditorial, objectifs et 30 jours d'accompagnement après la formation.</p></div></li>
+            </ol>
+          </div>
+
+          <!-- Tarifs -->
+          <div class="lg:col-span-2 space-y-5 reveal">
+            <div class="card price-featured p-6">
+              <span class="absolute -top-3 left-6 bg-accent text-tech text-xs font-black rounded-full px-3 py-1">MEILLEURE OFFRE</span>
+              <h3 class="font-extrabold text-lg">Early Bird</h3>
+              <p class="mt-2"><span class="text-4xl font-black">25&nbsp;000</span> <span class="font-semibold">FCFA</span></p>
+              <p class="text-sm text-slate-600 mt-1">Tarif réduit pour les premiers inscrits.</p>
+              <a href="#inscription" data-plan="Early Bird" class="plan-btn btn btn-accent w-full mt-5">Choisir Early Bird</a>
+            </div>
+            <div class="card p-6">
+              <h3 class="font-extrabold text-lg">Standard</h3>
+              <p class="mt-2"><span class="text-4xl font-black">30&nbsp;000</span> <span class="font-semibold">FCFA</span></p>
+              <p class="text-sm text-slate-600 mt-1">Tarif normal de la Session 1.</p>
+              <a href="#inscription" data-plan="Standard" class="plan-btn btn btn-action w-full mt-5">Choisir Standard</a>
+            </div>
+            <p class="text-xs text-slate-500">Paiement par Orange Money ou MTN MoMo. Votre place est confirmée après réception du paiement.</p>
+          </div>
+        </div>
+
+        <!-- Catalogue à venir -->
+        <div class="mt-16 reveal">
+          <h3 class="text-xl md:text-2xl font-extrabold">Bientôt au catalogue</h3>
+          <div class="mt-5 grid sm:grid-cols-3 gap-4">
+            <div class="card p-5 border-dashed">
+              <div class="w-11 h-11 rounded-xl bg-tech text-accent grid place-items-center font-black">Cv</div>
+              <h4 class="mt-3 font-bold">Canva</h4>
+              <p class="text-sm text-slate-600">Design graphique simple et pro pour vos visuels et vos clients.</p>
+              <span class="mt-3 inline-block text-xs font-bold bg-slate-100 rounded-full px-3 py-1">Bientôt</span>
+            </div>
+            <div class="card p-5 border-dashed">
+              <div class="w-11 h-11 rounded-xl bg-tech text-accent grid place-items-center font-black">Cc</div>
+              <h4 class="mt-3 font-bold">CapCut</h4>
+              <p class="text-sm text-slate-600">Montage vidéo mobile : effets, sous-titres et formats viraux.</p>
+              <span class="mt-3 inline-block text-xs font-bold bg-slate-100 rounded-full px-3 py-1">Bientôt</span>
+            </div>
+            <div class="card p-5 border-dashed">
+              <div class="w-11 h-11 rounded-xl bg-tech text-accent grid place-items-center font-black">CM</div>
+              <h4 class="mt-3 font-bold">Community Management</h4>
+              <p class="text-sm text-slate-600">Gérer les réseaux d'une marque et en faire un métier.</p>
+              <span class="mt-3 inline-block text-xs font-bold bg-slate-100 rounded-full px-3 py-1">Bientôt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. POURQUOI -->
+    <section id="pourquoi" class="py-16 md:py-24 bg-tech text-white">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div class="reveal">
+            <p class="text-accent font-bold uppercase text-sm tracking-wider">Pourquoi MAKAHO Academy</p>
+            <h2 class="mt-2 text-3xl md:text-4xl font-black">Ouvrir les yeux sur les opportunités du digital</h2>
+            <p class="mt-5 text-slate-300">Chaque jour, des Camerounais gagnent leur vie grâce à un téléphone et une connexion. Beaucoup passent à côté parce que personne ne leur a montré comment faire.</p>
+            <p class="mt-4 text-slate-300">MAKAHO, c'est l'idée d'<strong class="text-white">ouvrir les yeux</strong> : comprendre ce que le digital rend possible ici, à Yaoundé, et acquérir les gestes précis pour en profiter, sans jargon et sans théorie inutile.</p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4 reveal">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6 sm:col-span-2">
+              <p class="text-5xl font-black text-accent">70&nbsp;%</p>
+              <h3 class="mt-2 font-bold text-lg">de pratique</h3>
+              <p class="text-sm text-slate-300 mt-1">Vous produisez pendant les cours, pas seulement après. Vous repartez avec du contenu réel.</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+              <p class="text-5xl font-black text-action">30<span class="text-2xl"> jours</span></p>
+              <h3 class="mt-2 font-bold text-lg">d'accompagnement</h3>
+              <p class="text-sm text-slate-300 mt-1">Un suivi après la formation pour appliquer et corriger.</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+              <p class="text-5xl font-black text-accent">237</p>
+              <h3 class="mt-2 font-bold text-lg">Ancré au Cameroun</h3>
+              <p class="text-sm text-slate-300 mt-1">Exemples, paiements et marché locaux.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ÉQUIPE -->
+    <section id="equipe" class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="max-w-2xl reveal">
+          <p class="text-action font-bold uppercase text-sm tracking-wider">Formateurs &amp; équipe</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-black">Deux experts, une même mission</h2>
+          <p class="mt-4 text-slate-600">Les fondateurs de MAKAHO Academy vous forment eux-mêmes et restent disponibles après les cours.</p>
+        </div>
+        <div class="mt-10 grid md:grid-cols-2 gap-6">
+          <!-- TODO : remplacer nom, photo et bio -->
+          <article class="card p-6 flex gap-5 items-start reveal">
+            <div class="shrink-0 w-20 h-20 rounded-2xl bg-tech text-accent grid place-items-center text-3xl font-black" aria-hidden="true">F1</div>
+            <div>
+              <h3 class="text-xl font-extrabold">[Nom du fondateur 1]</h3>
+              <p class="text-action font-semibold text-sm">Co-fondateur · Formateur — Contenu &amp; monétisation</p>
+              <p class="mt-3 text-sm text-slate-600">Expert du digital, il accompagne créateurs et entrepreneurs dans la construction d'une audience et de revenus durables.</p>
+            </div>
+          </article>
+          <article class="card p-6 flex gap-5 items-start reveal">
+            <div class="shrink-0 w-20 h-20 rounded-2xl bg-tech text-accent grid place-items-center text-3xl font-black" aria-hidden="true">F2</div>
+            <div>
+              <h3 class="text-xl font-extrabold">[Nom du fondateur 2]</h3>
+              <p class="text-action font-semibold text-sm">Co-fondateur · Formateur — Graphisme &amp; création</p>
+              <p class="mt-3 text-sm text-slate-600">Spécialiste du graphisme et de l'image de marque, il transmet une méthode simple pour créer des visuels professionnels.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. INSCRIPTION -->
+    <section id="inscription" class="py-16 md:py-24 bg-gradient-to-b from-slate-100 to-slate-50">
+      <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-5 gap-10">
+        <div class="lg:col-span-2 reveal">
+          <p class="text-action font-bold uppercase text-sm tracking-wider">Inscription</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-black">Réservez votre place</h2>
+          <p class="mt-4 text-slate-600">Remplissez le formulaire : vos informations sont envoyées directement sur notre WhatsApp, et nous vous répondons rapidement.</p>
+
+          <div class="mt-8 card p-6">
+            <h3 class="font-extrabold">Modes de paiement</h3>
+            <ul class="mt-4 space-y-3">
+              <li class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-full bg-orange-500 text-white grid place-items-center font-black text-xs">OM</span>
+                <div><strong>Orange Money</strong><p class="text-sm text-slate-600">696 67 30 09</p></div>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-full bg-yellow-400 text-tech grid place-items-center font-black text-xs">MoMo</span>
+                <div><strong>MTN MoMo</strong><p class="text-sm text-slate-600">674 17 22 25</p></div>
+              </li>
+            </ul>
+            <p class="mt-4 text-xs text-slate-500">Envoyez la capture de votre paiement sur WhatsApp pour confirmer votre inscription.</p>
+          </div>
+
+          <div class="mt-4 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3">
+            <a href="https://wa.me/237674172225" target="_blank" rel="noopener" class="btn btn-action flex-1">WhatsApp : 674 17 22 25</a>
+            <a href="tel:+237696673009" class="btn btn-accent flex-1">Appeler : 696 67 30 09</a>
+          </div>
+        </div>
+
+        <form id="reg-form" class="card lg:col-span-3 p-6 md:p-8 reveal" novalidate>
+          <h3 class="text-xl font-extrabold">Formulaire d'inscription</h3>
+          <div class="mt-6 grid sm:grid-cols-2 gap-4">
+            <div>
+              <label for="nom" class="block text-sm font-semibold mb-1.5">Nom complet *</label>
+              <input id="nom" name="nom" type="text" class="field" autocomplete="name" required placeholder="Ex : Marie Ngono">
+            </div>
+            <div>
+              <label for="tel" class="block text-sm font-semibold mb-1.5">Téléphone (WhatsApp) *</label>
+              <input id="tel" name="tel" type="tel" inputmode="tel" class="field" autocomplete="tel" required placeholder="Ex : 6 7X XX XX XX">
+            </div>
+            <div>
+              <label for="ville" class="block text-sm font-semibold mb-1.5">Ville / Quartier</label>
+              <input id="ville" name="ville" type="text" class="field" autocomplete="address-level2" placeholder="Ex : Yaoundé, Mvog-Ada">
+            </div>
+            <div>
+              <label for="paiement" class="block text-sm font-semibold mb-1.5">Mode de paiement</label>
+              <select id="paiement" name="paiement" class="field">
+                <option>Orange Money</option>
+                <option>MTN MoMo</option>
+              </select>
+            </div>
+          </div>
+
+          <fieldset class="mt-5">
+            <legend class="block text-sm font-semibold mb-2">Formule *</legend>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <label class="flex items-center gap-3 border-2 border-slate-200 rounded-xl p-4 cursor-pointer has-[:checked]:border-accent has-[:checked]:bg-accent/10">
+                <input type="radio" name="formule" value="Early Bird (25 000 FCFA)" class="accent-[#FFB800] w-5 h-5" checked>
+                <span><strong>Early Bird</strong><br><span class="text-sm text-slate-600">25 000 FCFA</span></span>
+              </label>
+              <label class="flex items-center gap-3 border-2 border-slate-200 rounded-xl p-4 cursor-pointer has-[:checked]:border-accent has-[:checked]:bg-accent/10">
+                <input type="radio" name="formule" value="Standard (30 000 FCFA)" class="accent-[#FFB800] w-5 h-5">
+                <span><strong>Standard</strong><br><span class="text-sm text-slate-600">30 000 FCFA</span></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="mt-5">
+            <label for="message" class="block text-sm font-semibold mb-1.5">Message (facultatif)</label>
+            <textarea id="message" name="message" rows="3" class="field" placeholder="Une question ? Une attente particulière ?"></textarea>
+          </div>
+
+          <p id="form-error" class="mt-4 text-sm font-semibold text-rose-600 hidden" role="alert"></p>
+
+          <button type="submit" class="btn btn-action w-full mt-6 text-base">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6A12 12 0 0 0 12 24c6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.5ZM12 22a10 10 0 0 1-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A10 10 0 1 1 12 22Zm5.5-7.5c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2l-.9 1.1c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.5.1-.2 0-.4 0-.5l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6a1.200 1.200 0 0 0-.9.4 3.800 3.800 0 0 0-1.200 2.800c0 1.700 1.200 3.300 1.400 3.500.2.200 2.400 3.700 5.800 5.100 2.100.9 2.900.9 4 .8.600-.1 1.800-.7 2-1.400.3-.7.3-1.300.2-1.400-.1-.1-.3-.2-.6-.4Z"/></svg>
+            Envoyer mon inscription sur WhatsApp
+          </button>
+          <p class="mt-3 text-xs text-slate-500 text-center">En cliquant, WhatsApp s'ouvre avec votre message déjà rédigé. Vous n'avez plus qu'à l'envoyer.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- 7. PIED DE PAGE -->
+  <footer class="bg-tech text-slate-300">
+    <div class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="inline-block bg-white rounded-xl p-2"><img src="assets/logo.png" alt="MAKAHO Academy" class="h-12 w-auto" width="110" height="48" loading="lazy"></div>
+        <p class="mt-4 text-sm">École de formation aux métiers du digital et au graphisme — Yaoundé, Cameroun.</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold">Contact</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:text-accent" href="https://wa.me/237674172225" target="_blank" rel="noopener">WhatsApp / MoMo : 674 17 22 25</a></li>
+          <li><a class="hover:text-accent" href="tel:+237696673009">Appel / OM : 696 67 30 09</a></li>
+          <li>Yaoundé, Cameroun</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold">Suivez-nous</h3>
+        <!-- TODO : remplacer les # par les vrais liens des comptes -->
+        <div class="mt-3 flex gap-3">
+          <a href="#" aria-label="TikTok" class="w-10 h-10 rounded-full bg-white/10 hover:bg-accent hover:text-tech grid place-items-center transition">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.7a5 5 0 0 1-3.900-4.200V2h-3.300v13.400a2.800 2.800 0 1 1-2-2.700V9.300a6.100 6.100 0 1 0 5.300 6.100V9a8.300 8.300 0 0 0 4.800 1.500V7.200a4.900 4.900 0 0 1-.9-.5Z"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full bg-white/10 hover:bg-accent hover:text-tech grid place-items-center transition">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M13.500 22v-8.200h2.800l.4-3.300h-3.200V8.400c0-.9.300-1.600 1.600-1.600h1.700V3.900c-.3 0-1.300-.1-2.500-.1-2.500 0-4.100 1.500-4.100 4.200v2.500H7.400v3.300h2.800V22h3.300Z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-white/10 hover:bg-accent hover:text-tech grid place-items-center transition">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.500" cy="6.500" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://wa.me/237674172225" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-white/10 hover:bg-action grid place-items-center transition">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.500 3.500A11.900 11.900 0 0 0 12 0C5.400 0 0 5.400 0 12c0 2.100.6 4.200 1.600 6L0 24l6.200-1.600A12 12 0 0 0 12 24c6.600 0 12-5.400 12-12 0-3.200-1.200-6.200-3.500-8.500Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <div class="max-w-6xl mx-auto px-4 py-5 flex flex-col sm:flex-row justify-between gap-2 text-xs text-slate-400">
+        <p>© <span id="year">2026</span> MAKAHO Academy. Tous droits réservés.</p>
+        <button id="legal-btn" class="underline text-left hover:text-accent">Mentions légales</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mentions légales -->
+  <div id="legal-modal" class="hidden fixed inset-0 z-[60] bg-tech/80 p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+    <div class="bg-white text-tech rounded-2xl max-w-xl mx-auto my-10 p-6 md:p-8">
+      <div class="flex justify-between items-start gap-4">
+        <h2 id="legal-title" class="text-xl font-extrabold">Mentions légales</h2>
+        <button id="legal-close" class="text-2xl leading-none p-1" aria-label="Fermer">&times;</button>
+      </div>
+      <!-- TODO : compléter avec les informations légales réelles -->
+      <div class="mt-4 space-y-3 text-sm text-slate-700">
+        <p><strong>Éditeur :</strong> MAKAHO Academy — Yaoundé, Cameroun. [Forme juridique, n° RCCM / NIU à compléter]</p>
+        <p><strong>Contact :</strong> WhatsApp 674 17 22 25 · Téléphone 696 67 30 09.</p>
+        <p><strong>Hébergement :</strong> [Nom et adresse de l'hébergeur à compléter]</p>
+        <p><strong>Données personnelles :</strong> les informations saisies dans le formulaire ne sont pas stockées sur ce site : elles sont transmises via WhatsApp à MAKAHO Academy pour traiter votre inscription uniquement. Pour toute demande de suppression, contactez-nous sur WhatsApp.</p>
+        <p><strong>Propriété intellectuelle :</strong> le logo, les textes et les contenus du site sont la propriété de MAKAHO Academy. Toute reproduction sans autorisation est interdite.</p>
+        <p><strong>Tarifs :</strong> indiqués en francs CFA (FCFA), susceptibles d'évoluer selon les sessions.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barre CTA mobile -->
+  <div class="mobile-cta md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-slate-200 px-3 pt-3 flex gap-2">
+    <a href="tel:+237696673009" class="btn btn-accent !px-4" aria-label="Appeler"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.600 10.800a15 15 0 0 0 6.600 6.600l2.200-2.200a1 1 0 0 1 1-.25 11.400 11.400 0 0 0 3.600.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.500a1 1 0 0 1 1 1c0 1.300.2 2.500.6 3.600a1 1 0 0 1-.25 1Z"/></svg></a>
+    <a href="#inscription" class="btn btn-action flex-1">S'inscrire — dès 25 000 FCFA</a>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
