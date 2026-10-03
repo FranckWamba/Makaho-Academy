@@ -1,245 +1,304 @@
-// MAKAHO Academy — navigation, filtres, formulaires, micro-interactions
-(() => {
-  const WA_NUMBER = '237674172225'; // WhatsApp d'inscription (MTN MoMo)
-  const PAY = {
-    'MTN MoMo': { num: '674 17 22 25', color: 'bg-yellow-400 text-tech' },
-    'Orange Money': { num: '696 67 30 09', color: 'bg-orange-500 text-white' },
-  };
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ==========================================================
+   MAKAHO ACADEMY — main.js
+   Modifiez uniquement le bloc CONFIG pour mettre le site à jour.
+   ========================================================== */
 
-  /* ---------- En-tête & menu mobile ---------- */
-  const header = $('.site-header');
-  const onScroll = () => header && header.classList.toggle('scrolled', window.scrollY > 10);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+const CONFIG = {
+  whatsapp: "237674172225",          // WhatsApp (sans + ni espaces)
+  whatsappDisplay: "674 17 22 25",
+  phone: "+237696673009",            // Appels
+  phoneDisplay: "696 67 30 09",
+  momo: "674 17 22 25",              // MTN Mobile Money
+  om: "696 67 30 09",                // Orange Money
+  beneficiaire: "",                  // Nom affiché lors du paiement (ex. "Franck Wamba"). Laisser vide pour masquer.
+  email: "",                         // ex. "contact@makaho-academy.com". Laisser vide pour masquer.
 
-  const menuBtn = $('#menu-btn');
-  const menu = $('#mobile-menu');
-  if (menuBtn && menu) {
-    const setMenu = (open) => {
-      menu.hidden = !open;
-      menuBtn.setAttribute('aria-expanded', String(open));
-      menuBtn.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
-    };
-    menuBtn.addEventListener('click', () => setMenu(menu.hidden));
-    $$('a', menu).forEach((a) => a.addEventListener('click', () => setMenu(false)));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+  session: {
+    titre: "TikTok Pro Camer : de zéro à créateur rentable",
+    date: "",                        // ex. "Samedi 7 et dimanche 8 novembre 2026". Vide = "Date annoncée très bientôt"
+    lieu: "Yaoundé",
+    placesTotal: 30,
+    placesReservees: 0               // Mettez à jour à chaque paiement d'inscription reçu
+  },
+
+  tarifs: {
+    earlybird: { label: "Early bird", prix: 25000 },
+    standard:  { label: "Standard",   prix: 30000 },
+    groupe:    { label: "Groupe (3 personnes et plus)", prix: 22500 },
+    vip:       { label: "VIP (audit + coaching 1 h)", prix: 50000 }
+  },
+  fraisInscription: 5000,
+
+  reseaux: {                         // Remplacez "#" par vos liens
+    TikTok: "#",
+    Facebook: "#",
+    Instagram: "#",
+    LinkedIn: "#",
+    YouTube: "#"
   }
+};
 
-  const yr = $('#year');
-  if (yr) yr.textContent = new Date().getFullYear();
+const fcfa = (n) => n.toLocaleString("fr-FR").replace(/\u202f|\u00a0/g, " ") + " FCFA";
+const waLink = (text) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
 
-  /* ---------- Apparition au défilement, compteurs, jauge ---------- */
-  const animateCount = (el) => {
-    const end = parseInt(el.dataset.count, 10);
-    if (reduceMotion) { el.textContent = end; return; }
-    const t0 = performance.now();
-    const tick = (t) => {
-      const p = Math.min((t - t0) / 1200, 1);
-      el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-  const watch = $$('.reveal, [data-count], .ratio-bar');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        const el = e.target;
-        el.classList.add('visible', 'go');
-        if (el.dataset.count) animateCount(el);
-        io.unobserve(el);
-      });
-    }, { threshold: 0.15 });
-    watch.forEach((el) => io.observe(el));
-  } else {
-    watch.forEach((el) => { el.classList.add('visible', 'go'); if (el.dataset.count) el.textContent = el.dataset.count; });
-  }
+const ICON_WA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.3-1.9-1-1 .8a4 4 0 0 1-2.3-2.3l.8-1-1-1.9z" fill="currentColor" stroke="none"/></svg>';
 
-  /* ---------- Halo qui suit le curseur ---------- */
-  $$('.spot').forEach((card) => {
-    card.addEventListener('pointermove', (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
+/* ---------- Navigation mobile ---------- */
+function initNav() {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.getElementById("site-nav");
+  if (!toggle || !nav) return;
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    nav.classList.toggle("open", !open);
   });
-
-  /* ---------- Mockup smartphone (accueil) ---------- */
-  const tabs = $$('.phone-tab');
-  const panes = $$('.phone-pane');
-  if (tabs.length) {
-    let current = 0, timer;
-    const show = (i) => {
-      current = i;
-      tabs.forEach((t, k) => t.classList.toggle('on', k === i));
-      panes.forEach((p, k) => p.classList.toggle('on', k === i));
-    };
-    const auto = () => { clearInterval(timer); if (!reduceMotion) timer = setInterval(() => show((current + 1) % tabs.length), 5000); };
-    tabs.forEach((t, i) => t.addEventListener('click', () => { show(i); auto(); }));
-    show(0); auto();
-    const likes = $('#likes');
-    if (likes) {
-      let n = 12400;
-      $('#like-btn')?.addEventListener('click', () => {
-        n += 1; likes.textContent = n.toLocaleString('fr-FR');
-        const h = document.createElement('span');
-        h.className = 'heart absolute text-lg'; h.textContent = '❤️'; h.style.right = `${10 + Math.random() * 20}px`; h.style.bottom = '90px';
-        $('#like-layer').appendChild(h); setTimeout(() => h.remove(), 3000);
-      });
+  nav.addEventListener("click", (e) => {
+    if (e.target.closest("a")) { toggle.setAttribute("aria-expanded", "false"); nav.classList.remove("open"); }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("open")) {
+      toggle.setAttribute("aria-expanded", "false"); nav.classList.remove("open"); toggle.focus();
     }
-  }
+  });
+}
 
-  /* ---------- Filtres du catalogue ---------- */
-  const filterBtns = $$('[data-filter]');
-  const courses = $$('.course');
-  if (filterBtns.length && courses.length) {
-    const search = $('#course-search');
-    const counter = $('#result-count');
-    const empty = $('#no-result');
-    let active = 'all';
+/* ---------- Pied de page (source unique) ---------- */
+function renderFooter() {
+  const el = document.getElementById("site-footer");
+  if (!el) return;
+  const socials = Object.entries(CONFIG.reseaux)
+    .map(([name, url]) => `<li><a href="${url}" target="_blank" rel="noopener">${name}</a></li>`).join("");
+  const year = new Date().getFullYear();
+  el.innerHTML = `
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand-badge" href="index.html" aria-label="Makaho Academy, accueil">
+            <img src="assets/makaho-icon.png" alt="" width="42" height="33">
+            <span class="brand-word"><strong>MAKAHO</strong><span>ACADEMY</span></span>
+          </a>
+          <p>École de formation aux métiers du digital et du graphisme, à Yaoundé. Ouvrez les yeux sur le digital.</p>
+        </div>
+        <div>
+          <h2>Navigation</h2>
+          <ul>
+            <li><a href="formations.html">Formations</a></li>
+            <li><a href="a-propos.html">À propos</a></li>
+            <li><a href="blog.html">Articles</a></li>
+            <li><a href="contact.html">Inscription et contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Nous contacter</h2>
+          <ul>
+            <li><a href="https://wa.me/${CONFIG.whatsapp}" target="_blank" rel="noopener">WhatsApp : ${CONFIG.whatsappDisplay}</a></li>
+            <li><a href="tel:${CONFIG.phone}">Appel : ${CONFIG.phoneDisplay}</a></li>
+            ${CONFIG.email ? `<li><a href="mailto:${CONFIG.email}">${CONFIG.email}</a></li>` : ""}
+            <li>Yaoundé, Cameroun</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Suivez-nous</h2>
+          <ul>${socials}</ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© ${year} Makaho Academy. Tous droits réservés.</span>
+        <span><a href="mentions-legales.html">Mentions légales</a> &nbsp;|&nbsp; <a href="mentions-legales.html#donnees">Données personnelles</a> &nbsp;|&nbsp; <a href="mentions-legales.html#conditions">Conditions d'inscription</a></span>
+      </div>
+    </div>`;
+}
 
-    const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-
-    const apply = () => {
-      const q = search ? norm(search.value.trim()) : '';
-      let shown = 0;
-      courses.forEach((c) => {
-        const okCat = active === 'all' || c.dataset.cat.split(' ').includes(active);
-        const okText = !q || norm(c.textContent).includes(q);
-        const visible = okCat && okText;
-        if (visible && c.classList.contains('is-hidden') && !reduceMotion) {
-          c.classList.add('pop'); setTimeout(() => c.classList.remove('pop'), 500);
-        }
-        c.classList.toggle('is-hidden', !visible);
-        if (visible) shown += 1;
-      });
-      $$('.course-group').forEach((g) => { g.hidden = !$$('.course:not(.is-hidden)', g).length; });
-      if (counter) counter.textContent = `${shown} formation${shown > 1 ? 's' : ''}`;
-      if (empty) empty.hidden = shown !== 0;
-    };
-
-    const setFilter = (f) => {
-      active = f;
-      filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === f)));
-      apply();
-    };
-
-    filterBtns.forEach((b) => {
-      const n = b.dataset.filter === 'all' ? courses.length : courses.filter((c) => c.dataset.cat.split(' ').includes(b.dataset.filter)).length;
-      const span = document.createElement('span'); span.className = 'count'; span.textContent = n; b.appendChild(span);
-      b.addEventListener('click', () => { setFilter(b.dataset.filter); history.replaceState(null, '', b.dataset.filter === 'all' ? location.pathname : `#${b.dataset.filter}`); });
-    });
-    search?.addEventListener('input', apply);
-    $('#reset-filters')?.addEventListener('click', () => { if (search) search.value = ''; setFilter('all'); });
-
-    const fromHash = () => {
-      const h = location.hash.slice(1);
-      return filterBtns.some((b) => b.dataset.filter === h) ? h : 'all';
-    };
-    setFilter(fromHash());
-    window.addEventListener('hashchange', () => setFilter(fromHash()));
-  }
-
-  /* ---------- Formulaires → WhatsApp ---------- */
-  const openWhatsApp = (lines) => {
-    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
-    window.open(url, '_blank', 'noopener');
+/* ---------- Champs remplis depuis CONFIG ---------- */
+function fillConfig() {
+  document.querySelectorAll(".ico-wa").forEach((n) => (n.outerHTML = ICON_WA));
+  document.querySelectorAll("[data-wa]").forEach((a) => {
+    a.href = waLink(a.dataset.wa || "Bonjour Makaho Academy, je souhaite avoir des informations.");
+    a.target = "_blank"; a.rel = "noopener";
+  });
+  document.querySelectorAll("[data-tel]").forEach((a) => { a.href = `tel:${CONFIG.phone}`; });
+  const map = {
+    "wa-display": CONFIG.whatsappDisplay, "tel-display": CONFIG.phoneDisplay,
+    "momo": CONFIG.momo, "om": CONFIG.om,
+    "session-titre": CONFIG.session.titre, "session-lieu": CONFIG.session.lieu,
+    "session-date": CONFIG.session.date || "Date annoncée très bientôt",
+    "places-total": String(CONFIG.session.placesTotal),
+    "frais": fcfa(CONFIG.fraisInscription)
   };
+  Object.entries(map).forEach(([k, v]) => document.querySelectorAll(`[data-fill="${k}"]`).forEach((n) => (n.textContent = v)));
+  Object.entries(CONFIG.tarifs).forEach(([k, t]) =>
+    document.querySelectorAll(`[data-price="${k}"]`).forEach((n) => (n.textContent = t.prix.toLocaleString("fr-FR").replace(/\u202f|\u00a0/g, " ")))
+  );
+  document.querySelectorAll("[data-beneficiaire]").forEach((n) => {
+    if (CONFIG.beneficiaire) n.querySelector("strong").textContent = CONFIG.beneficiaire; else n.hidden = true;
+  });
+}
 
-  const setupForm = (form, buildMessage) => {
-    const errorBox = $('.form-error', form);
-    const val = (n) => (form.elements[n] ? form.elements[n].value.trim() : '');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      $$('.field', form).forEach((f) => f.classList.remove('invalid'));
-      let error = '';
-      for (const f of $$('[required]', form)) {
-        if (!f.value.trim()) { error = 'Merci de remplir les champs marqués d\'un *.'; f.classList.add('invalid'); break; }
-      }
-      const tel = form.elements.tel;
-      if (!error && tel && tel.value.replace(/\D/g, '').length < 8) { error = 'Merci de saisir un numéro de téléphone valide.'; tel.classList.add('invalid'); }
-      const mail = form.elements.email;
-      if (!error && mail && mail.value && !/^\S+@\S+\.\S+$/.test(mail.value)) { error = 'Adresse e-mail invalide.'; mail.classList.add('invalid'); }
-      if (error) {
-        errorBox.textContent = error; errorBox.hidden = false;
-        const bad = $('.invalid', form); if (bad) bad.focus();
-        return;
-      }
-      errorBox.hidden = true;
-      openWhatsApp(buildMessage(val, form));
-    });
-  };
-
-  const regForm = $('#reg-form');
-  if (regForm) {
-    // Présélection depuis ?formation=
-    const wanted = new URLSearchParams(location.search).get('formation');
-    const sel = regForm.elements.formation;
-    if (wanted && sel) {
-      const opt = $$('option', sel).find((o) => o.dataset.slug === wanted);
-      if (opt) sel.value = opt.value;
+/* ---------- Les 30 sièges ---------- */
+function renderSeats() {
+  const { placesTotal, placesReservees } = CONFIG.session;
+  const left = Math.max(placesTotal - placesReservees, 0);
+  document.querySelectorAll("[data-seats]").forEach((grid) => {
+    grid.innerHTML = "";
+    for (let i = 0; i < placesTotal; i++) {
+      const s = document.createElement("span");
+      s.className = "seat" + (i < placesReservees ? " taken" : "");
+      grid.appendChild(s);
     }
-    // Info de paiement dynamique
-    const payInfo = $('#pay-info');
-    const updatePay = () => {
-      const m = regForm.querySelector('input[name="paiement"]:checked').value;
-      payInfo.innerHTML = `<span class="w-10 h-10 shrink-0 rounded-full grid place-items-center font-black text-[10px] ${PAY[m].color}">${m === 'MTN MoMo' ? 'MoMo' : 'OM'}</span><span>Envoyez le montant au <strong class="text-tech">${PAY[m].num}</strong> (${m}), puis joignez la capture dans WhatsApp pour confirmer votre place.</span>`;
-    };
-    $$('input[name="paiement"]', regForm).forEach((r) => r.addEventListener('change', updatePay));
-    updatePay();
+    grid.setAttribute("aria-label", `${placesReservees} places réservées sur ${placesTotal}`);
+  });
+  document.querySelectorAll("[data-fill='places-left']").forEach((n) => (n.textContent = String(left)));
+  document.querySelectorAll("[data-fill='places-left-label']").forEach((n) => {
+    n.textContent = left === 0 ? "Session complète : inscrivez-vous sur liste d'attente"
+      : placesReservees === 0 ? `places disponibles sur ${placesTotal}` : `places restantes sur ${placesTotal}`;
+  });
+}
 
-    setupForm(regForm, (v) => {
-      const lines = [
-        'Bonjour MAKAHO Academy 👋',
-        'Je souhaite candidater à une formation.',
-        '',
-        `🎓 Formation : ${v('formation')}`,
-        `🧭 Mode : ${v('mode')}`,
-        `👤 Nom : ${v('nom')}`,
-        `📞 Téléphone/WhatsApp : ${v('tel')}`,
-      ];
-      if (v('email')) lines.push(`✉️ E-mail : ${v('email')}`);
-      lines.push(`🌍 Pays / Ville : ${v('pays')}${v('ville') ? ' — ' + v('ville') : ''}`);
-      lines.push(`📈 Niveau : ${v('niveau')}`);
-      lines.push(`💳 Paiement prévu : ${regForm.querySelector('input[name="paiement"]:checked').value}`);
-      if (v('message')) lines.push('', `💬 ${v('message')}`);
-      return lines;
-    });
+/* ---------- L'œil suit le regard (pointeur fin uniquement) ---------- */
+function initEye() {
+  const pupil = document.querySelector(".eye-pupil");
+  const svg = document.querySelector(".eye-svg");
+  if (!pupil || !svg) return;
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  window.addEventListener("pointermove", (e) => {
+    const r = svg.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    const d = Math.hypot(dx, dy) || 1;
+    const k = Math.min(d / 300, 1);
+    pupil.style.transform = `translate(${(dx / d) * 26 * k}px, ${(dy / d) * 14 * k}px)`;
+  }, { passive: true });
+}
+
+/* ---------- Barre mobile ---------- */
+function initMobileBar() {
+  const bar = document.querySelector(".mobile-bar");
+  if (!bar) return;
+  document.body.classList.add("has-mobile-bar");
+  const hero = document.querySelector(".hero, .page-hero");
+  if (!hero || !("IntersectionObserver" in window)) { bar.classList.add("show"); return; }
+  new IntersectionObserver(([en]) => bar.classList.toggle("show", !en.isIntersecting), { threshold: 0.1 }).observe(hero);
+}
+
+/* ---------- Formulaire → WhatsApp ---------- */
+function initForm() {
+  const form = document.getElementById("reservation-form");
+  if (!form) return;
+
+  const params = new URLSearchParams(location.search);
+  if (params.get("formule") && form.formule.querySelector(`option[value="${params.get("formule")}"]`)) form.formule.value = params.get("formule");
+  if (params.get("formation") && form.formation.querySelector(`option[value="${params.get("formation")}"]`)) form.formation.value = params.get("formation");
+
+  const out = {
+    formule: document.getElementById("sum-formule"),
+    total: document.getElementById("sum-total"),
+    now: document.getElementById("sum-now"),
+    box: document.getElementById("summary")
+  };
+  const formuleField = document.getElementById("field-formule");
+  const placesField = document.getElementById("field-places");
+
+  function currentFormule() {
+    const n = parseInt(form.places.value, 10) || 1;
+    let key = form.formule.value;
+    if (n >= 3 && key !== "vip") key = "groupe";
+    if (n < 3 && key === "groupe") key = "standard";
+    return { key, n, tarif: CONFIG.tarifs[key] };
   }
 
-  const b2bForm = $('#b2b-form');
-  if (b2bForm) {
-    setupForm(b2bForm, (v) => {
-      const lines = [
-        'Bonjour MAKAHO Academy 👋',
-        'Demande de devis — Offre Entreprises (B2B).',
-        '',
-        `🏢 Entreprise : ${v('entreprise')}`,
-        `👤 Contact : ${v('nom')}`,
-        `📞 Téléphone : ${v('tel')}`,
-      ];
-      if (v('email')) lines.push(`✉️ E-mail : ${v('email')}`);
-      lines.push(`🎯 Besoin : ${v('besoin')}`, `👥 Équipe : ${v('equipe')}`);
-      if (v('message')) lines.push('', `💬 ${v('message')}`);
-      return lines;
-    });
+  function update() {
+    const isBootcamp = form.formation.value === "bootcamp";
+    formuleField.hidden = !isBootcamp;
+    placesField.hidden = !isBootcamp;
+    out.box.hidden = !isBootcamp;
+    if (!isBootcamp) return;
+    const { n, tarif } = currentFormule();
+    out.formule.textContent = `${tarif.label} × ${n}`;
+    out.total.textContent = fcfa(tarif.prix * n);
+    out.now.textContent = fcfa(CONFIG.fraisInscription * n);
   }
 
-  /* ---------- Mentions légales ---------- */
-  const modal = $('#legal-modal');
-  if (modal) {
-    const toggle = (open) => {
-      modal.hidden = !open;
-      document.body.style.overflow = open ? 'hidden' : '';
-      (open ? $('#legal-close') : $('#legal-btn')).focus();
-    };
-    $('#legal-btn').addEventListener('click', () => toggle(true));
-    $('#legal-close').addEventListener('click', () => toggle(false));
-    modal.addEventListener('click', (e) => { if (e.target === modal) toggle(false); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) toggle(false); });
+  function setError(name, msg) {
+    const field = form.querySelector(`[name="${name}"]`).closest(".field");
+    field.classList.toggle("invalid", !!msg);
+    field.querySelector(".error").textContent = msg || "";
   }
-})();
+
+  function validate() {
+    let ok = true;
+    const nom = form.nom.value.trim();
+    const tel = form.telephone.value.replace(/[\s.-]/g, "");
+    setError("nom", nom.length < 2 ? "Indiquez votre nom et prénom." : "");
+    if (nom.length < 2) ok = false;
+    const telOk = /^(\+?237)?6\d{8}$/.test(tel) || /^\+\d{8,15}$/.test(tel);
+    setError("telephone", telOk ? "" : "Indiquez un numéro WhatsApp valide, par exemple 6 70 00 00 00.");
+    if (!telOk) ok = false;
+    const consent = form.consentement.checked;
+    setError("consentement", consent ? "" : "Cochez cette case pour envoyer votre demande.");
+    if (!consent) ok = false;
+    return ok;
+  }
+
+  form.addEventListener("input", update);
+  form.addEventListener("change", update);
+  update();
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!validate()) { form.querySelector(".invalid input, .invalid select")?.focus(); return; }
+
+    const formationLabel = form.formation.options[form.formation.selectedIndex].text;
+    const paiement = form.paiement.value === "om" ? `Orange Money (${CONFIG.om})` : `MTN MoMo (${CONFIG.momo})`;
+    const lines = [];
+    if (form.formation.value === "bootcamp") {
+      const { n, tarif } = currentFormule();
+      lines.push(
+        "Bonjour Makaho Academy 👋",
+        `Je souhaite pré-réserver ${n > 1 ? n + " places" : "ma place"} pour le bootcamp « ${CONFIG.session.titre} » (Session 1, ${CONFIG.session.lieu}).`,
+        "",
+        `• Nom : ${form.nom.value.trim()}`,
+        `• WhatsApp : ${form.telephone.value.trim()}`,
+        form.quartier.value.trim() ? `• Quartier / ville : ${form.quartier.value.trim()}` : null,
+        `• Profil : ${form.profil.value}`,
+        `• Formule : ${tarif.label} – ${fcfa(tarif.prix)}${n > 1 ? " / personne" : ""}`,
+        `• Nombre de places : ${n}`,
+        `• Total : ${fcfa(tarif.prix * n)}`,
+        `• Paiement des frais d'inscription (${fcfa(CONFIG.fraisInscription * n)}) via : ${paiement}`,
+        form.message.value.trim() ? `• Message : ${form.message.value.trim()}` : null,
+        "",
+        "Merci de me confirmer ma réservation."
+      );
+    } else {
+      lines.push(
+        "Bonjour Makaho Academy 👋",
+        `Je suis intéressé(e) par : ${formationLabel}.`,
+        "",
+        `• Nom : ${form.nom.value.trim()}`,
+        `• WhatsApp : ${form.telephone.value.trim()}`,
+        form.quartier.value.trim() ? `• Quartier / ville : ${form.quartier.value.trim()}` : null,
+        `• Profil : ${form.profil.value}`,
+        form.message.value.trim() ? `• Message : ${form.message.value.trim()}` : null,
+        "",
+        "Merci de me tenir informé(e)."
+      );
+    }
+    const text = lines.filter((l) => l !== null).join("\n");
+    const url = waLink(text);
+    const win = window.open(url, "_blank", "noopener");
+    if (!win) window.location.href = url;
+    const done = document.getElementById("form-done");
+    if (done) { done.hidden = false; done.focus(); }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderFooter();
+  fillConfig();
+  renderSeats();
+  initNav();
+  initEye();
+  initMobileBar();
+  initForm();
+});

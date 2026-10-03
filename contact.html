@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Inscription et contact | Makaho Academy</title>
+  <meta name="description" content="Pré-réservez votre place au bootcamp TikTok de Makaho Academy à Yaoundé. Formulaire envoyé sur WhatsApp, paiement par Orange Money ou MTN MoMo.">
+  <meta property="og:title" content="Inscription et contact | Makaho Academy">
+  <meta property="og:description" content="Pré-réservez votre place au bootcamp TikTok de Makaho Academy à Yaoundé. Formulaire envoyé sur WhatsApp, paiement par Orange Money ou MTN MoMo.">
+  <meta property="og:image" content="assets/logo-makaho-original.png">
+  <meta name="theme-color" content="#0D1527">
+  <link rel="icon" href="assets/makaho-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Makaho Academy, accueil">
+      <img src="assets/makaho-icon.png" alt="" width="46" height="36">
+      <span class="brand-word"><strong>MAKAHO</strong><span>ACADEMY</span></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu"><span></span></button>
+    <nav id="site-nav" class="site-nav" aria-label="Navigation principale">
+      <ul class="nav-list">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="formations.html">Formations</a></li>
+        <li><a href="a-propos.html">À propos</a></li>
+        <li><a href="blog.html">Articles</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+        <li class="nav-cta"><a class="btn btn-action" href="contact.html">Pré-réserver ma place</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu">
+  <section class="page-hero on-dark">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="index.html">Accueil</a> / Inscription et contact</p>
+      <h1>Pré-réservez votre place</h1>
+      <p class="lead">Remplissez le formulaire : votre message WhatsApp est rédigé automatiquement, vous n'avez plus qu'à l'envoyer. Il reste <strong style="color:var(--amber)"><span data-fill="places-left">30</span> places</strong>.</p>
+    </div>
+  </section>
+
+  <section class="section bg-paper">
+    <div class="wrap form-layout">
+
+      <div class="form-card">
+        <h2 style="font-size:1.6rem">Vos informations</h2>
+        <p class="small">Les champs marqués d'un astérisque sont obligatoires.</p>
+
+        <form id="reservation-form" novalidate>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="formation">Formation *</label>
+              <select id="formation" name="formation">
+                <option value="bootcamp">Session 1 : bootcamp TikTok de 2 jours (pré-réservation)</option>
+                <option value="express">TikTok Express, 1 journée (être prévenu)</option>
+                <option value="autre">Une autre formation du catalogue (être prévenu)</option>
+                <option value="entreprise">Une formation pour mon entreprise (devis)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="nom">Nom et prénom *</label>
+              <input id="nom" name="nom" type="text" autocomplete="name" required>
+              <span class="error" aria-live="polite"></span>
+            </div>
+            <div class="field">
+              <label for="telephone">Numéro WhatsApp *</label>
+              <input id="telephone" name="telephone" type="tel" inputmode="tel" autocomplete="tel" placeholder="6 70 00 00 00" required>
+              <span class="error" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+              <label for="quartier">Quartier ou ville</label>
+              <input id="quartier" name="quartier" type="text" placeholder="Ex. Bastos, Yaoundé">
+            </div>
+            <div class="field">
+              <label for="profil">Vous êtes</label>
+              <select id="profil" name="profil">
+                <option>Étudiant(e)</option>
+                <option>Commerçant(e) ou e-commerçant(e)</option>
+                <option>Créateur ou créatrice de contenu</option>
+                <option>Entrepreneur(e)</option>
+                <option>Salarié(e)</option>
+                <option>Autre</option>
+              </select>
+            </div>
+
+            <div class="field" id="field-formule">
+              <label for="formule">Formule</label>
+              <select id="formule" name="formule">
+                <option value="earlybird">Early bird : 25 000 FCFA</option>
+                <option value="standard">Standard : 30 000 FCFA</option>
+                <option value="vip">VIP : 50 000 FCFA (audit + coaching)</option>
+              </select>
+              <span class="hint">À partir de 3 places, le tarif groupe (22 500 FCFA / pers.) s'applique.</span>
+            </div>
+            <div class="field" id="field-places">
+              <label for="places">Nombre de places</label>
+              <input id="places" name="places" type="number" min="1" max="10" value="1" inputmode="numeric">
+            </div>
+
+            <fieldset class="field full">
+              <legend>Vous paierez les frais d'inscription par</legend>
+              <div class="radio-row">
+                <label><input type="radio" name="paiement" value="om" checked> Orange Money</label>
+                <label><input type="radio" name="paiement" value="momo"> MTN MoMo</label>
+              </div>
+            </fieldset>
+
+            <div class="field full">
+              <label for="message">Une question ou une précision ?</label>
+              <textarea id="message" name="message" placeholder="Ex. Je vends des vêtements et je veux utiliser TikTok pour trouver des clients."></textarea>
+            </div>
+
+            <div class="field full">
+              <label class="check"><input type="checkbox" name="consentement" id="consentement"> J'accepte que mes informations soient envoyées à Makaho Academy sur WhatsApp pour traiter ma demande, et j'ai lu les <a href="mentions-legales.html#conditions">conditions d'inscription</a>.</label>
+              <span class="error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <dl class="summary" id="summary" aria-live="polite">
+            <dt>Formule</dt><dd id="sum-formule">Early bird × 1</dd>
+            <dt>Total de la formation</dt><dd id="sum-total">25 000 FCFA</dd>
+            <dt>À payer maintenant pour bloquer la place</dt><dd class="now" id="sum-now">5 000 FCFA</dd>
+          </dl>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-action btn-block"><span class="ico-wa"></span>Envoyer ma demande sur WhatsApp</button>
+            <p class="small" style="margin:0;text-align:center">WhatsApp s'ouvre avec votre message déjà rédigé.</p>
+          </div>
+
+          <div id="form-done" class="notice" tabindex="-1" hidden>
+            <strong>Votre message est prêt dans WhatsApp.</strong> Appuyez sur Envoyer, puis payez les frais d'inscription et envoyez la capture. Si WhatsApp ne s'est pas ouvert, écrivez-nous directement au <a data-wa href="#"><span data-fill="wa-display">674 17 22 25</span></a>.
+          </div>
+        </form>
+      </div>
+
+      <aside class="pay-card" aria-labelledby="pay-title">
+        <h2 id="pay-title">Payer l'inscription</h2>
+        <p>Envoyez <strong data-fill="frais">5 000 FCFA</strong> par place sur l'un de ces numéros, puis partagez la capture du paiement sur WhatsApp.</p>
+
+        <div class="pay-method">
+          <span class="pay-logo momo" aria-hidden="true">MTN<br>MoMo</span>
+          <div><strong data-fill="momo">674 17 22 25</strong><span>MTN Mobile Money</span></div>
+        </div>
+        <div class="pay-method">
+          <span class="pay-logo om" aria-hidden="true">Orange<br>Money</span>
+          <div><strong data-fill="om">696 67 30 09</strong><span>Orange Money</span></div>
+        </div>
+        <p class="small" data-beneficiaire>Nom affiché lors du paiement : <strong></strong></p>
+
+        <p class="notice">Les frais d'inscription bloquent votre place et ne sont pas remboursables en cas d'annulation de votre part. Le solde se règle au plus tard la veille de la formation.</p>
+
+        <h3 style="margin-top:2rem">Nous joindre</h3>
+        <ul class="contact-lines">
+          <li><a data-wa href="#">WhatsApp : <span data-fill="wa-display">674 17 22 25</span></a><span>Réponse rapide, 7 jours sur 7</span></li>
+          <li><a data-tel href="#">Appel : <span data-fill="tel-display">696 67 30 09</span></a><span>Du lundi au samedi, 9 h – 18 h</span></li>
+          <li><strong>Yaoundé, Cameroun</strong><span>L'adresse de la salle est envoyée aux inscrits.</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="main.js"></script>
+</body>
+</html>

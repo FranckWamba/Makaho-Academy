@@ -1,0 +1,24 @@
+MAKAHO ACADEMY - SITE VITRINE
+==============================
+
+Pages : index.html (accueil), formations.html, a-propos.html, contact.html (inscription),
+blog.html (articles), article-monetiser-tiktok-cameroun.html, mentions-legales.html.
+Fichiers communs : styles.css, main.js, dossier assets/.
+
+METTRE A JOUR LE SITE (fichier main.js, bloc CONFIG en haut)
+- session.date : la date de la session 1 (ex. "Samedi 7 et dimanche 8 novembre 2026")
+- session.placesReservees : à augmenter à chaque inscription payée (les 30 sièges se mettent à jour partout)
+- beneficiaire : nom affiché lors du paiement Mobile Money (vide = masqué)
+- reseaux : liens TikTok, Facebook, Instagram, LinkedIn, YouTube
+- tarifs, numéros WhatsApp / appel / OM / MoMo
+
+AVANT LA MISE EN LIGNE
+1. Photos des formateurs : déposez assets/franck-wamba.jpg et assets/lionel-nkoo-nkoum.jpg,
+   puis remplacez les initiales "FW" / "LN" dans index.html et a-propos.html (commentaire prévu à cet endroit).
+2. Complétez les éléments surlignés de mentions-legales.html (RCCM, NIU, adresse, hébergeur).
+3. Logo : assets/makaho-icon.png est l'icône extraite de votre logo (version "Agency").
+   Remplacez-la par la version "Academy" haute définition dès qu'elle est prête.
+
+HEBERGEMENT
+Site 100 % statique : il fonctionne sur n'importe quel hébergement (Netlify, Vercel, GitHub Pages,
+o2switch, LWS, Hostinger...). Envoyez simplement tout le dossier.
