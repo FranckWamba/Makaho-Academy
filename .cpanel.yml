@@ -4,5 +4,5 @@ deployment:
     - export DEPLOYPATH=/home/wafr9985/academy.makahogroup.com/
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp index.html formations.html a-propos.html blog.html contact.html mentions-legales.html article-monetiser-tiktok-cameroun.html 404.html $DEPLOYPATH
-    - /bin/cp styles.css main.js sitemap.xml robots.txt $DEPLOYPATH
+    - /bin/cp styles.css main.js sitemap.xml robots.txt .htaccess $DEPLOYPATH
     - /bin/cp -R assets $DEPLOYPATH
