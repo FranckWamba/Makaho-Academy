@@ -19,7 +19,7 @@ const CONFIG = {
     lieu: "Yaoundé",
     placesTotal: 30,
     placesReservees: 9,              // Valeur de secours (URL vide, réseau coupé ou cellule invalide)
-    sheetUrl: ""                     // Lien CSV d'une Google Sheet publiée. La cellule A1 doit contenir le nombre de places réservées.
+    sheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTB3u9pdGV4afMzrodmhynBUa_dNbqWKsPmQw4JrIc5lPh1tuXOLuynO4rfLvZl98LF6TQW-09-fqxS/pub?gid=0&single=true&output=csv"                   // Lien CSV d'une Google Sheet publiée. La cellule A1 doit contenir le nombre de places réservées.
                                      // Vide = le site utilise placesReservees ci-dessus.
   },
 
