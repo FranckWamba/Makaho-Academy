@@ -189,12 +189,10 @@ p { margin: 0 0 1em; }
   70% { transform: scaleY(1.04); }
   100% { transform: scaleY(1); }
 }
-.eye-caption { text-align: center; color: #8E99B3; font-size: .92rem; margin-top: 1rem; }
 
 @media (max-width: 860px) {
   .hero-grid { grid-template-columns: 1fr; }
   .eye-wrap { order: -1; width: min(70%, 300px); }
-  .eye-caption { display: none; }
   .hero h1 { max-width: none; }
 }
 
@@ -310,11 +308,24 @@ p { margin: 0 0 1em; }
 .on-dark h3 { color: var(--white); }
 @media (max-width: 860px) { .pillars { grid-template-columns: 1fr; gap: 1.75rem; } }
 
-/* Histoire du nom */
-.name-story { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-.name-word { font-family: var(--font-display); font-weight: 800; font-size: clamp(3.5rem, 10vw, 7rem); line-height: .9; letter-spacing: -0.04em; color: var(--navy); }
-.name-word small { display: block; font-family: var(--font-body); font-size: 1rem; letter-spacing: 0; font-weight: 600; color: var(--muted); margin-top: 1rem; }
-@media (max-width: 860px) { .name-story { grid-template-columns: 1fr; } }
+/* Domaines de formation : le digital en vedette, les autres métiers autour */
+.domains { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: stretch; }
+.domain-core { position: relative; overflow: hidden; background: var(--navy); color: var(--white); border-radius: var(--radius-lg); padding: clamp(1.75rem, 4vw, 3rem); }
+.domain-core::before { content: ""; position: absolute; right: -100px; bottom: -110px; width: 380px; height: 380px; background: var(--rings) center / contain no-repeat; pointer-events: none; }
+.domain-core > * { position: relative; }
+.domain-kicker { display: inline-block; font-weight: 700; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); background: var(--amber); padding: .3rem .7rem; border-radius: 6px; margin-bottom: 1.25rem; }
+.domain-core h3 { color: var(--white); font-size: clamp(1.9rem, 3.6vw, 2.8rem); letter-spacing: -0.02em; }
+.domain-core p { color: #C9D1E3; max-width: 46ch; }
+.domain-core .chips li { background: rgba(255,255,255,.08); border-color: #3A4766; color: var(--white); }
+.domain-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; }
+.domain-list-title { font-weight: 700; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 .25rem; }
+.domain-list li { display: grid; grid-template-columns: 46px 1fr; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
+.domain-list li:last-child { border-bottom: 0; }
+.domain-list .ico { width: 46px; height: 46px; border-radius: 12px; background: var(--green-soft); display: grid; place-items: center; }
+.domain-list .ico svg { width: 24px; height: 24px; fill: none; stroke: var(--green-dark); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.domain-list h3 { font-size: 1.2rem; margin-bottom: .2rem; }
+.domain-list p { margin: 0; color: var(--muted); font-size: .98rem; }
+@media (max-width: 860px) { .domains { grid-template-columns: 1fr; } }
 
 /* Étapes (vraie séquence) */
 .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1.5rem; }
@@ -484,6 +495,114 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 @media (max-width: 760px) {
   .mobile-bar { display: flex; }
   body.has-mobile-bar { padding-bottom: 84px; }
+}
+
+/* ---------- Ambiances de fond (relief discret, charte inchangée) ----------
+   Motifs repris du logo : carrés vert/jaune, anneaux d'iris, grille de points.
+   Images de fond optionnelles : déposez assets/bg-hero.webp et assets/bg-bandeau.webp.
+   Si un fichier est absent, le fond navy + halos prend le relais, sans rien casser. */
+:root {
+  --img-hero: url("assets/bg-hero.webp");
+  --img-bandeau: url("assets/bg-bandeau.webp");
+  --veil: linear-gradient(105deg, rgba(13,21,39,.94) 0%, rgba(13,21,39,.86) 55%, rgba(13,21,39,.78) 100%),
+          linear-gradient(180deg, rgba(13,21,39,0) 70%, #0D1527 100%);
+  --halo-dark: radial-gradient(55% 80% at 88% 15%, rgba(16,185,129,.16), transparent 62%),
+               radial-gradient(45% 70% at 8% 105%, rgba(255,184,0,.11), transparent 62%);
+  --rings: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' fill='none' stroke='%23FFB800'%3E%3Ccircle cx='200' cy='200' r='195' stroke-opacity='.10' stroke-width='2'/%3E%3Ccircle cx='200' cy='200' r='155' stroke-opacity='.14' stroke-width='2'/%3E%3Ccircle cx='200' cy='200' r='115' stroke-opacity='.18' stroke-width='2'/%3E%3Ccircle cx='200' cy='200' r='75' stroke-opacity='.24' stroke-width='2'/%3E%3Ccircle cx='200' cy='200' r='36' stroke-opacity='.32' stroke-width='3'/%3E%3C/svg%3E");
+  --squares: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Cg fill-opacity='.55'%3E%3Crect x='26' width='22' height='22' rx='3' fill='%2310B981'/%3E%3Crect y='26' width='22' height='22' rx='3' fill='%2310B981'/%3E%3Crect x='26' y='26' width='22' height='22' rx='3' fill='%23FFB800'/%3E%3Crect x='52' y='26' width='22' height='22' rx='3' fill='%23FFB800'/%3E%3Crect x='26' y='52' width='22' height='22' rx='3' fill='%23FFB800'/%3E%3C/g%3E%3C/svg%3E");
+  --dots-dark: radial-gradient(circle, rgba(255,255,255,.16) 1.2px, transparent 1.7px);
+  --dots-light: radial-gradient(circle, rgba(13,21,39,.09) 1.2px, transparent 1.7px);
+}
+
+/* Contenu toujours au-dessus des décors */
+main > section, .site-footer { position: relative; }
+main > section > .wrap, .site-footer > .wrap { position: relative; z-index: 1; }
+.hero::before, .page-hero::before, .bg-paper::before, .bg-navy::before, .site-footer::before, .cta-band::after {
+  content: ""; position: absolute; pointer-events: none; z-index: 0;
+}
+.page-hero { position: relative; overflow: hidden; }
+.bg-navy, .bg-paper, .site-footer { overflow: hidden; }
+
+/* Héros accueil : image (optionnelle) + voile fondu + halos ; anneaux d'iris derrière l'œil */
+.hero {
+  background-color: var(--navy);
+  background-image: var(--halo-dark), var(--veil), var(--img-hero);
+  background-size: auto, auto, cover;
+  background-position: center, center, center;
+  background-repeat: no-repeat;
+}
+.hero::before {
+  inset: 0;
+  background: var(--rings) right -9% center / min(62vw, 640px) no-repeat,
+              var(--squares) right 4% bottom 9% / 84px no-repeat,
+              var(--dots-dark) left 0 bottom 0 / 26px 26px;
+  -webkit-mask-image: linear-gradient(100deg, transparent 25%, #000 75%);
+          mask-image: linear-gradient(100deg, transparent 25%, #000 75%);
+}
+
+/* Bandeaux des pages intérieures */
+.page-hero {
+  background-color: var(--navy);
+  background-image: var(--halo-dark), var(--veil), var(--img-bandeau);
+  background-size: auto, auto, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.page-hero::before {
+  inset: 0;
+  background: var(--rings) right -4% center / min(48vw, 380px) no-repeat,
+              var(--dots-dark) right 0 top 0 / 26px 26px;
+  -webkit-mask-image: linear-gradient(100deg, transparent 40%, #000 85%);
+          mask-image: linear-gradient(100deg, transparent 40%, #000 85%);
+}
+
+/* Section navy « marquée » (formateurs, vision) */
+.bg-navy { background-image: var(--halo-dark); }
+.bg-navy::before {
+  inset: 0;
+  background: var(--rings) left -8% bottom -45% / min(70vw, 560px) no-repeat,
+              var(--squares) right 3% top 8% / 76px no-repeat,
+              var(--dots-dark) right 0 bottom 0 / 26px 26px;
+  -webkit-mask-image: linear-gradient(120deg, #000 0%, transparent 55%, #000 100%);
+          mask-image: linear-gradient(120deg, #000 0%, transparent 55%, #000 100%);
+}
+
+/* Sections claires : très discret */
+.bg-paper {
+  background-image: radial-gradient(50% 70% at 100% 0, rgba(255,184,0,.07), transparent 65%),
+                    radial-gradient(45% 60% at 0 100%, rgba(16,185,129,.07), transparent 65%);
+}
+.bg-paper::before {
+  inset: 0; background: var(--dots-light) 0 0 / 26px 26px;
+  -webkit-mask-image: radial-gradient(60% 80% at 100% 0, #000, transparent 70%);
+          mask-image: radial-gradient(60% 80% at 100% 0, #000, transparent 70%);
+}
+main > .section:not(.bg-paper):not(.bg-navy) {
+  background-image: radial-gradient(45% 50% at 100% 0, rgba(255,184,0,.05), transparent 65%);
+}
+
+/* Bandeau CTA : mosaïque de carrés du logo */
+.cta-band { position: relative; overflow: hidden; }
+.cta-band::after {
+  right: 1.5rem; top: 50%; width: 120px; height: 120px; transform: translateY(-50%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Cg fill='%230D1527' fill-opacity='.14'%3E%3Crect x='26' width='22' height='22' rx='3'/%3E%3Crect y='26' width='22' height='22' rx='3'/%3E%3Crect x='26' y='26' width='22' height='22' rx='3'/%3E%3Crect x='52' y='26' width='22' height='22' rx='3'/%3E%3Crect x='26' y='52' width='22' height='22' rx='3'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+}
+.cta-band > * { position: relative; z-index: 1; }
+@media (max-width: 760px) { .cta-band::after { width: 84px; height: 84px; top: 1rem; transform: none; } }
+
+/* Pied de page */
+.site-footer::before {
+  inset: 0;
+  background: var(--rings) right -6% top -60% / 420px no-repeat, var(--dots-dark) 0 0 / 26px 26px;
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+          mask-image: linear-gradient(180deg, #000, transparent 85%);
+  opacity: .6;
+}
+
+@media (max-width: 860px) {
+  .hero::before { background-position: center top 2%, right 4% bottom 4%, left 0 bottom 0; background-size: min(90vw, 420px), 64px, 26px 26px;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 80%); mask-image: linear-gradient(180deg, #000 0%, transparent 80%); }
+  .page-hero::before { opacity: .6; }
 }
 
 /* ---------- Mouvement réduit ---------- */

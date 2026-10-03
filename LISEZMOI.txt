@@ -7,7 +7,10 @@ Fichiers communs : styles.css, main.js, dossier assets/.
 
 METTRE A JOUR LE SITE (fichier main.js, bloc CONFIG en haut)
 - session.date : la date de la session 1 (ex. "Samedi 7 et dimanche 8 novembre 2026")
-- session.placesReservees : à augmenter à chaque inscription payée (les 30 sièges se mettent à jour partout)
+- session.sheetUrl : lien CSV d'une Google Sheet publiée ; la cellule A1 contient le nombre de places réservées
+  (les 30 sièges et tous les compteurs se mettent à jour tout seuls). Vide = valeur de secours ci-dessous.
+- session.placesReservees : valeur de secours si sheetUrl est vide ou injoignable (à tenir à jour)
+- Fonds d'image optionnels : assets/bg-hero.webp (accueil) et assets/bg-bandeau.webp (bandeaux des autres pages)
 - beneficiaire : nom affiché lors du paiement Mobile Money (vide = masqué)
 - reseaux : liens TikTok, Facebook, Instagram, LinkedIn, YouTube
 - tarifs, numéros WhatsApp / appel / OM / MoMo

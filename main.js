@@ -18,7 +18,9 @@ const CONFIG = {
     date: "",                        // ex. "Samedi 7 et dimanche 8 novembre 2026". Vide = "Date annoncée très bientôt"
     lieu: "Yaoundé",
     placesTotal: 30,
-    placesReservees: 0               // Mettez à jour à chaque paiement d'inscription reçu
+    placesReservees: 9,              // Valeur de secours (URL vide, réseau coupé ou cellule invalide)
+    sheetUrl: ""                     // Lien CSV d'une Google Sheet publiée. La cellule A1 doit contenir le nombre de places réservées.
+                                     // Vide = le site utilise placesReservees ci-dessus.
   },
 
   tarifs: {
@@ -136,8 +138,8 @@ function fillConfig() {
 }
 
 /* ---------- Les 30 sièges ---------- */
-function renderSeats() {
-  const { placesTotal, placesReservees } = CONFIG.session;
+function renderSeats(placesReservees = CONFIG.session.placesReservees) {
+  const { placesTotal } = CONFIG.session;
   const left = Math.max(placesTotal - placesReservees, 0);
   document.querySelectorAll("[data-seats]").forEach((grid) => {
     grid.innerHTML = "";
@@ -153,6 +155,31 @@ function renderSeats() {
     n.textContent = left === 0 ? "Session complète : inscrivez-vous sur liste d'attente"
       : placesReservees === 0 ? `places disponibles sur ${placesTotal}` : `places restantes sur ${placesTotal}`;
   });
+}
+
+/* ---------- Places réservées depuis Google Sheets ----------
+   Lit la cellule A1 (première cellule de la première ligne) du CSV publié.
+   Toute erreur (URL vide, réseau, délai dépassé, valeur non numérique ou hors 0–placesTotal)
+   laisse l'affichage de secours basé sur CONFIG.session.placesReservees. */
+async function loadSeatsFromSheet() {
+  const { sheetUrl, placesTotal } = CONFIG.session;
+  if (!sheetUrl) return;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 6000);
+  try {
+    const url = sheetUrl + (sheetUrl.includes("?") ? "&" : "?") + "_=" + Date.now();   // anti-cache
+    const res = await fetch(url, { cache: "no-store", signal: ctrl.signal });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const a1 = (await res.text()).replace(/^﻿/, "").split(/\r?\n/)[0].split(",")[0].replace(/^"|"$/g, "").trim();
+    if (!/^\d+$/.test(a1)) throw new Error("A1 invalide");
+    const n = parseInt(a1, 10);
+    if (n > placesTotal) throw new Error("A1 hors limites");
+    renderSeats(n);
+  } catch (err) {
+    console.warn("Compteur de places : valeur de secours utilisée (" + err.message + ").");
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 /* ---------- L'œil suit le regard (pointeur fin uniquement) ---------- */
@@ -297,6 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderFooter();
   fillConfig();
   renderSeats();
+  loadSeatsFromSheet();
   initNav();
   initEye();
   initMobileBar();
