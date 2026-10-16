@@ -16,8 +16,7 @@ METTRE A JOUR LE SITE (fichier main.js, bloc CONFIG en haut)
 - tarifs, numéros WhatsApp / appel / OM / MoMo
 
 AVANT LA MISE EN LIGNE
-1. Photos des formateurs : déposez assets/franck-wamba.jpg et assets/lionel-nkoo-nkoum.jpg,
-   puis remplacez les initiales "FW" / "LN" dans index.html et a-propos.html (commentaire prévu à cet endroit).
+1. Photos des formateurs : en place (assets/franck-wamba.* et assets/lionel-nkoo-nkoum.*, formats jpg + webp, 480x600).
 2. Complétez les éléments surlignés de mentions-legales.html (RCCM, NIU, adresse, hébergeur).
 3. Logo : assets/makaho-icon.png est l'icône extraite de votre logo (version "Agency").
    Remplacez-la par la version "Academy" haute définition dès qu'elle est prête.
